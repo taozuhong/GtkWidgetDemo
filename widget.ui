@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="GtkWidgetWindow" parent="GtkApplicationWindow">
+    <property name="title">GTK widget demo</property>
+    <property name="default-width">800</property>
+    <property name="default-height">600</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="spacing">10</property>
+        <child>
+          <object class="Toolbar">
+            <property name="orientation">horizontal</property>
+            <style>
+              <class name="toolbar"/>
+            </style>
+            <child>
+              <object class="GtkToggleButton" id="button_name">
+                <property name="active">True</property>
+                <style>
+                  <class name="flat"/>
+                </style>
+                <property name="child">
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">5</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">format-justify-fill</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Name</property>
+                        <property name="use-underline">True</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkToggleButton" id="button_type">
+                <property name="active">True</property>
+                <style>
+                  <class name="flat"/>
+                </style>
+                <property name="child">
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">5</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">format-justify-fill</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Type</property>
+                        <property name="use-underline">True</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkToggleButton" id="button_size">
+                <property name="active">True</property>
+                <style>
+                  <class name="flat"/>
+                </style>
+                <property name="child">
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">5</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">format-justify-fill</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Size</property>
+                        <property name="use-underline">True</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkToggleButton" id="button_date">
+                <property name="active">True</property>
+                <style>
+                  <class name="flat"/>
+                </style>
+                <property name="child">
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">5</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">format-justify-fill</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Date</property>
+                        <property name="use-underline">True</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkMenuButton" id="button_calendar_datetime">
+            <property name="valign">center</property>
+            <property name="halign">center</property>
+            <property name="popover">popover_calendar_datetime</property>
+            <style>
+              <class name="flat"/>
+            </style>
+            <property name="child">
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="valign">center</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="icon-name">x-office-calendar-symbolic</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">Date and Time</property>
+                    <property name="use-underline">True</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkMenuButton" id="button_calendar_date">
+            <property name="valign">center</property>
+            <property name="halign">center</property>
+            <property name="popover">popover_calendar_date</property>
+            <style>
+              <class name="flat"/>
+            </style>
+            <property name="child">
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="valign">center</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="icon-name">x-office-calendar-symbolic</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">Date</property>
+                    <property name="use-underline">True</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkMenuButton" id="button_calendar_time">
+            <property name="valign">center</property>
+            <property name="halign">center</property>
+            <property name="popover">popover_calendar_time</property>
+            <style>
+              <class name="flat"/>
+            </style>
+            <property name="child">
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="valign">center</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="icon-name">x-office-calendar-symbolic</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">Time</property>
+                    <property name="use-underline">True</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+  <object class="GtkPopover" id="popover_calendar_datetime">
+    <property name="autohide">true</property>
+    <property name="position">bottom</property>
+    <property name="has-arrow">true</property>
+    <child>
+      <object class="DateTimePicker">
+        <property name="mode">datetime</property>
+        <property name="title" translatable="yes">Select date and time</property>
+      </object>
+    </child>
+  </object>
+  <object class="GtkPopover" id="popover_calendar_date">
+    <property name="autohide">true</property>
+    <property name="position">bottom</property>
+    <property name="has-arrow">true</property>
+    <child>
+      <object class="DateTimePicker">
+        <property name="mode">date</property>
+        <property name="title" translatable="yes">Select date</property>
+      </object>
+    </child>
+  </object>
+  <object class="GtkPopover" id="popover_calendar_time">
+    <property name="autohide">true</property>
+    <property name="position">bottom</property>
+    <property name="has-arrow">true</property>
+    <child>
+      <object class="DateTimePicker">
+        <property name="mode">time</property>
+        <property name="title" translatable="yes">Select time</property>
+      </object>
+    </child>
+  </object>
+  <object class="GtkSizeGroup">
+    <property name="mode">both</property>
+    <widgets>
+      <widget name="button_calendar_datetime"/>
+      <widget name="button_calendar_date"/>
+      <widget name="button_calendar_time"/>
+    </widgets>
+  </object>
+</interface>
