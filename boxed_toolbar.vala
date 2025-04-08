@@ -16,7 +16,7 @@ public enum ToolbarStyle {
     BOTH
 }
 
-public class Toolbar : Gtk.Widget, Gtk.Orientable {
+public class Toolbar : Gtk.Widget, Gtk.Buildable, Gtk.Orientable {
     private IconSize            m_icon_size;
     private ToolbarStyle        m_element_style;
     private SimpleActionGroup   m_action_group;
@@ -34,10 +34,6 @@ public class Toolbar : Gtk.Widget, Gtk.Orientable {
     }
 
     construct {
-        layout_manager = new Gtk.BoxLayout(Gtk.Orientation.HORIZONTAL);
-
-        m_icon_size = Gtk.IconSize.NORMAL;
-        m_element_style = ToolbarStyle.BOTH;
         m_action_group = new GLib.SimpleActionGroup ();
         m_action_group.add_action_entries (action_entries, this);
         this.insert_action_group ("Toolbar", m_action_group);
@@ -80,6 +76,9 @@ public class Toolbar : Gtk.Widget, Gtk.Orientable {
     public void append(Gtk.Widget widget)
     {
         widget.set_parent(this);
+
+        this.update_button_size(widget, m_icon_size);
+        this.update_button_style(widget, m_element_style);
     }
 
     public void remove(Gtk.Widget widget)
@@ -97,10 +96,11 @@ public class Toolbar : Gtk.Widget, Gtk.Orientable {
         base.dispose ();
     }
 
-    public void parser_finished (Gtk.Builder builder)
-    {
-        this.set_icon_size(m_icon_size);
-        this.set_toolbar_style(m_element_style);
+    public void add_child (Gtk.Builder builder, Object child, string? type) {
+        base.add_child (builder, child, type);
+
+        this.update_button_size(child as Gtk.Widget, m_icon_size);
+        this.update_button_style(child as Gtk.Widget, m_element_style);
     }
 
     private void handle_context_menu(GestureClick gesture, int n_press, double x, double y)
@@ -177,22 +177,7 @@ public class Toolbar : Gtk.Widget, Gtk.Orientable {
         Widget? widget = this.get_first_child();
         for (; null != widget; widget = widget.get_next_sibling())
         {
-            if ((widget is Gtk.Button) && ((widget as Gtk.Button).child is Gtk.Box)) {
-                button_box = ((widget as Gtk.Button).child as Gtk.Box);
-                if (button_box.get_first_child() is Gtk.Image) {
-                    (button_box.get_first_child() as Gtk.Image).icon_size = icon_size;;
-                }
-            } else if ((widget is Gtk.MenuButton) && ((widget as Gtk.MenuButton).child is Gtk.Box)) {
-                button_box = ((widget as Gtk.MenuButton).child as Gtk.Box);
-                if (button_box.get_first_child() is Gtk.Image) {
-                    (button_box.get_first_child() as Gtk.Image).icon_size = icon_size;;
-                }
-            } else if ((widget is Adw.SplitButton) && ((widget as Adw.SplitButton).child is Gtk.Box)) {
-                button_box = ((widget as Adw.SplitButton).child as Gtk.Box);
-                if (button_box.get_first_child() is Gtk.Image) {
-                    (button_box.get_first_child() as Gtk.Image).icon_size = icon_size;;
-                }
-            }
+            this.update_button_size(widget, icon_size);
         }
     }
 
@@ -239,18 +224,45 @@ public class Toolbar : Gtk.Widget, Gtk.Orientable {
         Widget? widget = this.get_first_child();
         for (; null != widget; widget = widget.get_next_sibling())
         {
-            if ((widget is Gtk.Button) && ((widget as Gtk.Button).child is Gtk.Box)) {
-                button_box = ((widget as Gtk.Button).child as Gtk.Box);
-                button_box.get_first_child().visible = (ToolbarStyle.ICON == style) || (ToolbarStyle.BOTH == style);
-                button_box.get_last_child().visible = (ToolbarStyle.TEXT == style) || (ToolbarStyle.BOTH == style);
-            } else if ((widget is Gtk.MenuButton) && ((widget as Gtk.MenuButton).child is Gtk.Box)) {
-                button_box = ((widget as Gtk.MenuButton).child as Gtk.Box);
-                button_box.get_first_child().visible = (ToolbarStyle.ICON == style) || (ToolbarStyle.BOTH == style);
-                button_box.get_last_child().visible = (ToolbarStyle.TEXT == style) || (ToolbarStyle.BOTH == style);
-            } else if ((widget is Adw.SplitButton) && ((widget as Adw.SplitButton).child is Gtk.Box)) {
-                button_box = ((widget as Adw.SplitButton).child as Gtk.Box);
-                button_box.get_first_child().visible = (ToolbarStyle.ICON == style) || (ToolbarStyle.BOTH == style);
-                button_box.get_last_child().visible = (ToolbarStyle.TEXT == style) || (ToolbarStyle.BOTH == style);
+            this.update_button_style(widget, style);
+        }
+    }
+
+    private void update_button_style(Gtk.Widget widget, ToolbarStyle style)
+    {
+        Gtk.Box button_box;
+        if ((widget is Gtk.Button) && ((widget as Gtk.Button).child is Gtk.Box)) {
+            button_box = ((widget as Gtk.Button).child as Gtk.Box);
+            button_box.get_first_child().visible = (ToolbarStyle.ICON == style) || (ToolbarStyle.BOTH == style);
+            button_box.get_last_child().visible = (ToolbarStyle.TEXT == style) || (ToolbarStyle.BOTH == style);
+        } else if ((widget is Gtk.MenuButton) && ((widget as Gtk.MenuButton).child is Gtk.Box)) {
+            button_box = ((widget as Gtk.MenuButton).child as Gtk.Box);
+            button_box.get_first_child().visible = (ToolbarStyle.ICON == style) || (ToolbarStyle.BOTH == style);
+            button_box.get_last_child().visible = (ToolbarStyle.TEXT == style) || (ToolbarStyle.BOTH == style);
+        } else if ((widget is Adw.SplitButton) && ((widget as Adw.SplitButton).child is Gtk.Box)) {
+            button_box = ((widget as Adw.SplitButton).child as Gtk.Box);
+            button_box.get_first_child().visible = (ToolbarStyle.ICON == style) || (ToolbarStyle.BOTH == style);
+            button_box.get_last_child().visible = (ToolbarStyle.TEXT == style) || (ToolbarStyle.BOTH == style);
+        }
+    }
+
+    private void update_button_size(Gtk.Widget widget, Gtk.IconSize size)
+    {
+        Gtk.Box button_box;
+        if ((widget is Gtk.Button) && ((widget as Gtk.Button).child is Gtk.Box)) {
+            button_box = ((widget as Gtk.Button).child as Gtk.Box);
+            if (button_box.get_first_child() is Gtk.Image) {
+                (button_box.get_first_child() as Gtk.Image).icon_size = size;
+            }
+        } else if ((widget is Gtk.MenuButton) && ((widget as Gtk.MenuButton).child is Gtk.Box)) {
+            button_box = ((widget as Gtk.MenuButton).child as Gtk.Box);
+            if (button_box.get_first_child() is Gtk.Image) {
+                (button_box.get_first_child() as Gtk.Image).icon_size = size;
+            }
+        } else if ((widget is Adw.SplitButton) && ((widget as Adw.SplitButton).child is Gtk.Box)) {
+            button_box = ((widget as Adw.SplitButton).child as Gtk.Box);
+            if (button_box.get_first_child() is Gtk.Image) {
+                (button_box.get_first_child() as Gtk.Image).icon_size = size;
             }
         }
     }

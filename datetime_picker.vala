@@ -16,7 +16,7 @@ public enum DateTimePickerMode {
 }
 
 [GtkTemplate(ui = "/taozuhong/widgets/datetime_picker.ui")]
-public class DateTimePicker : Gtk.Widget {
+public class DateTimePicker : Gtk.Widget, Gtk.Buildable {
     [GtkChild]
     private unowned Gtk.Box box_child;
     [GtkChild]
@@ -95,8 +95,6 @@ public class DateTimePicker : Gtk.Widget {
     }
 
     construct {
-        layout_manager = new Gtk.BinLayout();
-
         this.datetime = new DateTime.now_local();
         if (DateTimePickerMode.TIME == m_picker_mode) {
             this.calendar.visible = false;
@@ -123,13 +121,11 @@ public class DateTimePicker : Gtk.Widget {
     }
 
     public void add_child (Gtk.Builder builder, Object child, string? type) {
+        base.add_child (builder, child, type);
+
         if (child is Gtk.Widget) {
             m_user_widget = (Gtk.Widget) child;
-            m_user_widget?.set_parent (this);
-            return;
         }
-
-        base.add_child (builder, child, type);
     }
 
     [GtkCallback]

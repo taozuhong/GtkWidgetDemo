@@ -2,15 +2,16 @@
 <interface>
   <template class="GtkWidgetWindow" parent="GtkApplicationWindow">
     <property name="title">GTK widget demo</property>
-    <property name="default-width">800</property>
-    <property name="default-height">600</property>
+    <property name="default-width">600</property>
+    <property name="default-height">400</property>
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
         <property name="spacing">10</property>
         <child>
           <object class="Toolbar">
-            <property name="orientation">horizontal</property>
+            <property name="size">large</property>
+            <property name="style">icon</property>
             <style>
               <class name="toolbar"/>
             </style>
@@ -27,13 +28,13 @@
                     <property name="valign">center</property>
                     <child>
                       <object class="GtkImage">
-                        <property name="icon-name">format-justify-fill</property>
+                        <property name="icon-name">format-justify-left</property>
                         <property name="valign">center</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkLabel">
-                        <property name="label" translatable="yes">Name</property>
+                        <property name="label" translatable="yes">Left</property>
                         <property name="use-underline">True</property>
                         <property name="valign">center</property>
                       </object>
@@ -61,7 +62,7 @@
                     </child>
                     <child>
                       <object class="GtkLabel">
-                        <property name="label" translatable="yes">Type</property>
+                        <property name="label" translatable="yes">Fill</property>
                         <property name="use-underline">True</property>
                         <property name="valign">center</property>
                       </object>
@@ -83,13 +84,13 @@
                     <property name="valign">center</property>
                     <child>
                       <object class="GtkImage">
-                        <property name="icon-name">format-justify-fill</property>
+                        <property name="icon-name">format-justify-right</property>
                         <property name="valign">center</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkLabel">
-                        <property name="label" translatable="yes">Size</property>
+                        <property name="label" translatable="yes">Right</property>
                         <property name="use-underline">True</property>
                         <property name="valign">center</property>
                       </object>
