@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface domain="kangaroo">
+  <requires lib="gtk" version="4.0"/>
+  <template class="ViewSwitcherButton" parent="GtkWidget">
+    <property name="hexpand">true</property>
+    <child>
+      <object class="GtkBox" id="content">
+        <property name="orientation">horizontal</property>
+        <property name="spacing">5</property>
+        <property name="hexpand">true</property>
+        <child>
+          <object class="GtkImage" id="image" />
+        </child>
+        <child>
+          <object class="GtkLabel" id="label">
+            <property name="ellipsize">end</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkGestureClick">
+            <property name="button">0</property>
+            <signal name="pressed" handler="mouse_pressed_handler"/>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="button">
+        <property name="valign">center</property>
+        <property name="halign">end</property>
+        <property name="opacity">0.0</property>
+        <property name="tooltip-text" translatable="yes">Close</property>
+        <property name="icon-name">window-close-symbolic</property>
+        <signal name="clicked" handler="close_clicked_handler" swapped="false"/>
+        <style>
+          <class name="flat"/>
+          <class name="circular"/>
+        </style>
+      </object>
+    </child>
+    <child>
+      <object class="GtkEventControllerMotion">
+        <signal name="enter" handler="enter_handler"/>
+        <signal name="leave" handler="leave_handler"/>
+      </object>
+    </child>
+  </template>
+</interface>

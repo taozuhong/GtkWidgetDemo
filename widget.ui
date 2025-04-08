@@ -130,90 +130,182 @@
           </object>
         </child>
         <child>
-          <object class="GtkMenuButton" id="button_calendar_datetime">
-            <property name="valign">center</property>
+          <object class="GtkBox">
+            <property name="orientation">horizontal</property>
+            <property name="spacing">10</property>
             <property name="halign">center</property>
-            <property name="popover">popover_calendar_datetime</property>
-            <style>
-              <class name="flat"/>
-            </style>
-            <property name="child">
-              <object class="GtkBox">
-                <property name="orientation">horizontal</property>
+            <child>
+              <object class="GtkMenuButton" id="button_calendar_datetime">
                 <property name="valign">center</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="icon-name">x-office-calendar-symbolic</property>
+                <property name="halign">center</property>
+                <property name="popover">popover_calendar_datetime</property>
+                <style>
+                  <class name="flat"/>
+                </style>
+                <property name="child">
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
                     <property name="valign">center</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">x-office-calendar-symbolic</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Date and Time</property>
+                        <property name="use-underline">True</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
                   </object>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="label" translatable="yes">Date and Time</property>
-                    <property name="use-underline">True</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
+                </property>
               </object>
-            </property>
+            </child>
+            <child>
+              <object class="GtkMenuButton" id="button_calendar_date">
+                <property name="valign">center</property>
+                <property name="halign">center</property>
+                <property name="popover">popover_calendar_date</property>
+                <style>
+                  <class name="flat"/>
+                </style>
+                <property name="child">
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">x-office-calendar-symbolic</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Date</property>
+                        <property name="use-underline">True</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuButton" id="button_calendar_time">
+                <property name="valign">center</property>
+                <property name="halign">center</property>
+                <property name="popover">popover_calendar_time</property>
+                <style>
+                  <class name="flat"/>
+                </style>
+                <property name="child">
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">x-office-calendar-symbolic</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Time</property>
+                        <property name="use-underline">True</property>
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
-          <object class="GtkMenuButton" id="button_calendar_date">
-            <property name="valign">center</property>
-            <property name="halign">center</property>
-            <property name="popover">popover_calendar_date</property>
-            <style>
-              <class name="flat"/>
-            </style>
-            <property name="child">
-              <object class="GtkBox">
-                <property name="orientation">horizontal</property>
-                <property name="valign">center</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="icon-name">x-office-calendar-symbolic</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="label" translatable="yes">Date</property>
-                    <property name="use-underline">True</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-              </object>
-            </property>
+          <object class="ViewSwitcher" id="tabbar">
+            <property name="policy">wide</property>
+            <property name="stack">view_client</property>
+            <property name="halign">fill</property>
+            <property name="hexpand">true</property>
+            <signal name="close-page" handler="page_close_handler" swapped="false"/>
           </object>
         </child>
         <child>
-          <object class="GtkMenuButton" id="button_calendar_time">
-            <property name="valign">center</property>
-            <property name="halign">center</property>
-            <property name="popover">popover_calendar_time</property>
-            <style>
-              <class name="flat"/>
-            </style>
-            <property name="child">
-              <object class="GtkBox">
-                <property name="orientation">horizontal</property>
-                <property name="valign">center</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="icon-name">x-office-calendar-symbolic</property>
-                    <property name="valign">center</property>
-                  </object>
-                </child>
-                <child>
+          <object class="AdwViewStack" id="view_client">
+            <property name="hexpand">true</property>
+            <property name="vexpand">true</property>
+            <child>
+              <object class="AdwViewStackPage">
+                <property name="name">page1</property>
+                <property name="title" translatable="yes">_World</property>
+                <property name="icon-name">format-justify-left</property>
+                <property name="use-underline">True</property>
+                <property name="child">
                   <object class="GtkLabel">
-                    <property name="label" translatable="yes">Time</property>
-                    <property name="use-underline">True</property>
-                    <property name="valign">center</property>
+                    <property name="margin-top">24</property>
+                    <property name="margin-bottom">24</property>
+                    <property name="margin-start">24</property>
+                    <property name="margin-end">24</property>
+                    <property name="label" translatable="yes">World</property>
                   </object>
-                </child>
+                </property>
               </object>
-            </property>
+            </child>
+            <child>
+              <object class="AdwViewStackPage">
+                <property name="name">page2</property>
+                <property name="title" translatable="yes">_Alarm</property>
+                <property name="icon-name">format-justify-fill</property>
+                <property name="use-underline">True</property>
+                <property name="child">
+                  <object class="GtkLabel">
+                    <property name="margin-top">24</property>
+                    <property name="margin-bottom">24</property>
+                    <property name="margin-start">24</property>
+                    <property name="margin-end">24</property>
+                    <property name="label" translatable="yes">Alarm</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwViewStackPage">
+                <property name="name">page3</property>
+                <property name="title" translatable="yes">_Stopwatch</property>
+                <property name="icon-name">format-justify-right</property>
+                <property name="badge-number">3</property>
+                <property name="needs-attention">true</property>
+                <property name="use-underline">True</property>
+                <property name="child">
+                  <object class="GtkLabel">
+                    <property name="margin-top">24</property>
+                    <property name="margin-bottom">24</property>
+                    <property name="margin-start">24</property>
+                    <property name="margin-end">24</property>
+                    <property name="label" translatable="yes">Stopwatch</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwViewStackPage">
+                <property name="name">page4</property>
+                <property name="title" translatable="yes">Tim_er</property>
+                <property name="icon-name">format-justify-left</property>
+                <property name="use-underline">True</property>
+                <property name="child">
+                  <object class="GtkLabel">
+                    <property name="margin-top">24</property>
+                    <property name="margin-bottom">24</property>
+                    <property name="margin-start">24</property>
+                    <property name="margin-end">24</property>
+                    <property name="label" translatable="yes">Timer</property>
+                  </object>
+                </property>
+              </object>
+            </child>
           </object>
         </child>
       </object>

@@ -3,5 +3,6 @@
   <gresource prefix="/taozuhong/widgets">
     <file preprocess="xml-stripblanks">widget.ui</file>
     <file preprocess="xml-stripblanks">datetime_picker.ui</file>
+    <file preprocess="xml-stripblanks">view_switcher_button.ui</file>
   </gresource>
 </gresources>

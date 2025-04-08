@@ -3,6 +3,7 @@ project('GtkWidgetDemo', ['vala', 'c'])
 libraries= [
   dependency('gtk4', version: '>= 4.12.0', static: false),
   dependency('libadwaita-1', version: '>= 1.5', static: false),
+  dependency('gee-0.8', version: '>= 0.8', static: false),
 ]
 
 gnome=import('gnome')
@@ -17,6 +18,7 @@ sourcefiles = [
     'boxed_toolbar.vala',
     'datetime_picker.vala',
     'widget.vala',
+    'view_switcher.vala',
     'application.vala'
 ]
 
